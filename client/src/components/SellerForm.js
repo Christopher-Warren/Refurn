@@ -1,12 +1,49 @@
-import React from "react";
-import FileUpload from "./FileUpload";
+import React, { useState } from "react";
+import axios from "axios";
 
 const SellerForm = () => {
+  const [file, setFile] = useState("");
+  const [fileName, setFileName] = useState("Choose File");
+
+  const [uploadedFile, setUploadedFile] = useState({});
+
+  const onChange = (e) => {
+    setFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    // this points to file in backend
+    formData.append("file", file);
+
+    try {
+      const res = await axios.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      const { fileName, filePath } = res.data;
+
+      setUploadedFile({ fileName, filePath });
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("there was a problem with the server");
+      } else {
+        console.log(err.response.data.msg);
+      }
+    }
+  };
+
   return (
     <div className="card border-dark shadow-lg mt-5 pb-4 container">
       <h1 className="text-center">Furniture Submission Form</h1>
 
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputFirstName">First Name</label>
@@ -77,7 +114,17 @@ const SellerForm = () => {
           </div>
         </div>
 
-        <FileUpload />
+        <div className="form-group col-md-4 custom-file mb-3">
+          <input
+            type="file"
+            className="custom-file-input"
+            id="customFile"
+            onChange={onChange}
+          />
+          <label className="custom-file-label" htmlFor="customFile">
+            {fileName}
+          </label>
+        </div>
 
         <div className="form-group">
           <div className="form-check">
