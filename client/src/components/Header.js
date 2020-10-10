@@ -46,7 +46,7 @@ const Header = () => {
   };
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-dark"
+      className="navbar navbar-expand-lg navbar-dark shadow-sm"
       style={{ backgroundColor: "#0cb6c2" }}
     >
       <a className="navbar-brand mt-2">
