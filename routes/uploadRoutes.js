@@ -8,6 +8,7 @@ module.exports = (app) => {
 
     const file = req.files.file;
 
+    // Working!
     file.mv(`${DIRNAME}/client/public/uploads/${file.name}`, (err) => {
       if (err) {
         console.error(err);
@@ -17,5 +18,17 @@ module.exports = (app) => {
 
       res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
     });
+
+    // Saves to /db/images/{img}
+    // file.mv(`${DIRNAME}/db/images/${file.name}`, (err) => {
+    //   console.log(`${DIRNAME}/db/images/`);
+    //   if (err) {
+    //     console.error(err);
+
+    //     return res.status(500).send(err);
+    //   }
+
+    //   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+    // });
   });
 };

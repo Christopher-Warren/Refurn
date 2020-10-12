@@ -7,6 +7,15 @@ const SellerForm = () => {
 
   const [uploadedFile, setUploadedFile] = useState({});
 
+  // Form State
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [furnitureType, setFurnitureType] = useState("");
+  const [condition, setCondition] = useState("");
+  const [color, setColor] = useState("");
+  const [detailText, setDetailText] = useState("");
+  const [asking, setAsking] = useState("");
+
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -30,6 +39,17 @@ const SellerForm = () => {
       const { fileName, filePath } = res.data;
 
       setUploadedFile({ fileName, filePath });
+      const form = {
+        firstName,
+        lastName,
+        furnitureType,
+        condition,
+        color,
+        detailText,
+        asking,
+        uploadedFile,
+      };
+      console.log(form);
     } catch (err) {
       if (err.response.status === 500) {
         console.log("there was a problem with the server");
@@ -47,11 +67,21 @@ const SellerForm = () => {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputFirstName">First Name</label>
-            <input type="text" className="form-control" id="inputFirstName" />
+            <input
+              type="text"
+              className="form-control"
+              id="inputFirstName"
+              onChange={(e) => setFirstName(e.target.value)}
+            />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputLastName">Last Name</label>
-            <input type="text" className="form-control" id="inputPassword4" />
+            <input
+              type="text"
+              className="form-control"
+              id="inputPassword4"
+              onChange={(e) => setLastName(e.target.value)}
+            />
           </div>
         </div>
 
@@ -63,11 +93,16 @@ const SellerForm = () => {
               className="form-control"
               id="inputFurnitureType"
               placeholder="e.g Love Seat"
+              onChange={(e) => setFurnitureType(e.target.value)}
             />
           </div>
           <div className="form-group col-md-4">
             <label htmlFor="inputCondition">Condition</label>
-            <select id="inputCondition" className="form-control">
+            <select
+              id="inputCondition"
+              className="form-control"
+              onChange={(e) => setCondition(e.target.value)}
+            >
               <option defaultValue>Choose...</option>
               <option>Excellent</option>
               <option>Good</option>
@@ -77,7 +112,12 @@ const SellerForm = () => {
           </div>
           <div className="form-group col-md-2">
             <label htmlFor="inputColor">Color</label>
-            <input type="text" className="form-control" id="inputColor" />
+            <input
+              type="text"
+              className="form-control"
+              id="inputColor"
+              onChange={(e) => setColor(e.target.value)}
+            />
           </div>
         </div>
 
@@ -89,6 +129,7 @@ const SellerForm = () => {
               className="form-control"
               id="inputDetails"
               placeholder="This couch has endured many hours of very comfortable gaming."
+              onChange={(e) => setDetailText(e.target.value)}
             />
           </div>
           <div className="form-group col-md-6">
@@ -98,6 +139,7 @@ const SellerForm = () => {
               className="form-control"
               id="inputPrice"
               placeholder="$100"
+              onChange={(e) => setAsking(e.target.value)}
             />
           </div>
         </div>
@@ -110,10 +152,11 @@ const SellerForm = () => {
               className="form-control"
               id="inputPrice"
               placeholder="$100"
+              onChange={(e) => setAsking(e.target.value)}
             />
           </div>
         </div>
-
+        <p className="mb-2">Upload an Image</p>
         <div className="form-group col-md-4 custom-file mb-3">
           <input
             type="file"
@@ -142,6 +185,14 @@ const SellerForm = () => {
           Submit For Review
         </button>
       </form>
+      {uploadedFile ? (
+        <div className="row mt-5">
+          <div className="col-md-6 mx-auto">
+            <h3 className="text-center">{uploadedFile.fileName}</h3>
+            <img style={{ width: "100%" }} src={uploadedFile.filePath}></img>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
