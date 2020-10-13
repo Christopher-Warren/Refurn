@@ -7,7 +7,7 @@ module.exports = (app) => {
     }
 
     const file = req.files.file;
-
+    console.log("uploadRoutes: " + file.name);
     // Working!
     file.mv(`${DIRNAME}/client/public/uploads/${file.name}`, (err) => {
       if (err) {
@@ -16,7 +16,11 @@ module.exports = (app) => {
         return res.status(500).send(err);
       }
 
-      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
+      res.json({
+        fileName: file.name,
+        filePath: `/uploads/${file.name}`,
+        fileDir: `${req.protocol}://${req.get("host")}${req.url}s/${file.name}`,
+      });
     });
 
     // Saves to /db/images/{img}

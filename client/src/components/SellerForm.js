@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const SellerForm = () => {
+const SellerForm = (props) => {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("Choose File");
 
@@ -14,18 +14,16 @@ const SellerForm = () => {
   const [condition, setCondition] = useState("");
   const [color, setColor] = useState("");
   const [detailText, setDetailText] = useState("");
-  const [asking, setAsking] = useState("");
+  const [askingPrice, setAskingPrice] = useState("");
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmitReview = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-
     // this points to file in backend
     formData.append("file", file);
 
@@ -36,20 +34,34 @@ const SellerForm = () => {
         },
       });
 
-      const { fileName, filePath } = res.data;
+      const { fileName, filePath, fileDir } = res.data;
 
-      setUploadedFile({ fileName, filePath });
-      const form = {
+      setUploadedFile({ fileName, filePath, fileDir });
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("there was a problem with the server");
+      } else {
+        console.log(err.response.data.msg);
+      }
+    }
+  };
+
+  const onFinalClick = async (e) => {
+    e.preventDefault();
+    try {
+      const listingData = {
         firstName,
         lastName,
         furnitureType,
         condition,
         color,
         detailText,
-        asking,
-        uploadedFile,
+        askingPrice,
+        imageURL: uploadedFile.fileDir,
       };
-      console.log(form);
+      await axios.post("/api/submit", listingData);
+      console.log(listingData);
+      // window.location.href = "/thankyou";
     } catch (err) {
       if (err.response.status === 500) {
         console.log("there was a problem with the server");
@@ -61,9 +73,9 @@ const SellerForm = () => {
 
   return (
     <div className="card border-dark shadow-lg mt-5 pb-4 container">
-      <h1 className="text-center">Furniture Submission Form</h1>
+      <h1 className="text-center display-4">Furniture Submission Form</h1>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmitReview}>
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputFirstName">First Name</label>
@@ -122,7 +134,7 @@ const SellerForm = () => {
         </div>
 
         <div className="form-row">
-          <div className="form-group col-md-6">
+          <div className="form-group col-md-8">
             <label htmlFor="inputPrice">Details</label>
             <input
               type="text"
@@ -130,16 +142,6 @@ const SellerForm = () => {
               id="inputDetails"
               placeholder="This couch has endured many hours of very comfortable gaming."
               onChange={(e) => setDetailText(e.target.value)}
-            />
-          </div>
-          <div className="form-group col-md-6">
-            <label htmlFor="inputPrice">Asking Price</label>
-            <input
-              type="text"
-              className="form-control"
-              id="inputPrice"
-              placeholder="$100"
-              onChange={(e) => setAsking(e.target.value)}
             />
           </div>
         </div>
@@ -152,7 +154,7 @@ const SellerForm = () => {
               className="form-control"
               id="inputPrice"
               placeholder="$100"
-              onChange={(e) => setAsking(e.target.value)}
+              onChange={(e) => setAskingPrice(e.target.value)}
             />
           </div>
         </div>
@@ -181,18 +183,70 @@ const SellerForm = () => {
             </label>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          data-toggle="modal"
+          data-target="#staticBackdrop"
+          className="btn btn-primary"
+        >
           Submit For Review
         </button>
-      </form>
-      {uploadedFile ? (
-        <div className="row mt-5">
-          <div className="col-md-6 mx-auto">
-            <h3 className="text-center">{uploadedFile.fileName}</h3>
-            <img style={{ width: "100%" }} src={uploadedFile.filePath}></img>
+
+        <div
+          className="modal fade"
+          id="staticBackdrop"
+          data-backdrop="static"
+          data-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-xl">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title" id="staticBackdropLabel">
+                  Review Your Submission
+                </h1>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <h2>
+                  Name: {firstName} {lastName}
+                </h2>
+                <h2>Furniture Type: {furnitureType}</h2>
+                <h2>Condition: {condition}</h2>
+                <h2>Color: {color}</h2>
+                <h2>Details: {detailText}</h2>
+                <h2>Asking Price: {askingPrice}</h2>
+                {uploadedFile && <img src={uploadedFile.filePath}></img>}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-dismiss="modal"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={onFinalClick}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      ) : null}
+      </form>
     </div>
   );
 };
