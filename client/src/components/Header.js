@@ -9,10 +9,15 @@ const Header = () => {
   // Gets user data and sets state
   // Renders Login/logout button at right of nav
   const renderLogin = () => {
+    console.log(auth);
     switch (auth) {
       case null:
-        return;
-      case undefined:
+        return (
+          <div className="spinner-border text-light mr-4" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        );
+      case false:
         return (
           <div>
             <a

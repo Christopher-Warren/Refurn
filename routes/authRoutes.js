@@ -19,7 +19,12 @@ module.exports = (app) => {
   });
 
   app.get("/api/current_user", (req, res) => {
-    res.send(req.user);
-    console.log("authRoutes: user acquired");
+    if (req.user) {
+      res.send(req.user);
+    } else {
+      res.send(false);
+    }
+
+    console.log(`User "${req.user._id}" is logged in...`);
   });
 };

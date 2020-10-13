@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter, Route } from "react-router-dom";
 
@@ -11,14 +11,17 @@ import ThankYou from "./components/ThankYou";
 export const AuthContext = createContext();
 
 export default () => {
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(null);
 
-  const getUser = async () => {
-    const { data } = await axios.get("/api/current_user");
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await axios.get("/api/current_user");
 
-    setAuth(data._id);
-  };
-  getUser();
+      setAuth(data);
+    };
+    getUser();
+  }, []);
+
   return (
     <AuthContext.Provider value={auth}>
       <BrowserRouter>
