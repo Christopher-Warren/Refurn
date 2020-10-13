@@ -3,6 +3,9 @@
 // and letters.
 const cryptStr = require("../services/crypstopher");
 
+// We need a route to handle deleting
+// a listing and it's contents
+
 module.exports = (app) => {
   app.post("/upload", (req, res) => {
     const DIRNAME = require("path").resolve(__dirname, "..");

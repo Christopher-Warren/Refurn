@@ -40,7 +40,6 @@ const SellerForm = (props) => {
       });
 
       const { fileName, filePath, fileDir } = res.data;
-
       setUploadedFile({ fileName, filePath, fileDir });
     } catch (err) {
       if (err.response.status === 500) {
