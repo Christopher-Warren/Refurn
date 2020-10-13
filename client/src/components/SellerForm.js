@@ -81,7 +81,6 @@ const SellerForm = (props) => {
   };
 
   const renderContent = () => {
-    console.log(auth);
     switch (auth) {
       case null:
         return;
@@ -246,7 +245,12 @@ const SellerForm = (props) => {
                       <h2>Color: {color}</h2>
                       <h2>Details: {detailText}</h2>
                       <h2>Asking Price: {askingPrice}</h2>
-                      {uploadedFile && <img src={uploadedFile.filePath}></img>}
+                      {uploadedFile && (
+                        <img
+                          src={uploadedFile.filePath}
+                          alt={uploadedFile.fileName}
+                        ></img>
+                      )}
                     </div>
                     <div className="modal-footer">
                       <button
