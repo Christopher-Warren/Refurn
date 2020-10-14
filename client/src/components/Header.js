@@ -106,6 +106,15 @@ const Header = () => {
               Sell Your Furniture
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              className="nav-link"
+              to="/admindashboard"
+              activeClassName="active"
+            >
+              Dashboard
+            </NavLink>
+          </li>
         </ul>
 
         {renderLogin()}

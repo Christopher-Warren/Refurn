@@ -36,6 +36,7 @@ app.use(fileUpload());
 require("./routes/authRoutes")(app);
 require("./routes/uploadRoutes")(app);
 require("./routes/formSubmitRoutes")(app);
+require("./routes/listingRoutes")(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
