@@ -8,6 +8,7 @@ import Landing from "./components/Landing";
 import AvailibleFurniture from "./components/AvailibleFurniture";
 import ThankYou from "./components/ThankYou";
 import AdminDashboard from "./components/AdminDashboard";
+import UserDashboard from "./components/UserDashboard";
 
 export const AuthContext = createContext();
 
@@ -18,7 +19,7 @@ export default () => {
     const getUser = async () => {
       const { data } = await axios.get("/api/current_user");
 
-      setAuth(data);
+      setAuth(data._id);
     };
     getUser();
   }, []);
@@ -32,6 +33,7 @@ export default () => {
           <Route path="/sellerform" component={SellerForm} />
           <Route path="/availiblefurniture" component={AvailibleFurniture} />
           <Route path="/thankyou" component={ThankYou} />
+          <Route path="/dashboard" component={UserDashboard} />
           <Route path="/admindashboard" component={AdminDashboard} />
         </div>
       </BrowserRouter>

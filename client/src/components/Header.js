@@ -5,7 +5,8 @@ import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
   const auth = useContext(AuthContext);
-
+  // admin id is 5f84ddd76c5aa621a4448718
+  const admin = "5f84ddd76c5aa621a4448718";
   // Gets user data and sets state
   // Renders Login/logout button at right of nav
   const renderLogin = () => {
@@ -16,7 +17,7 @@ const Header = () => {
             <span className="sr-only">Loading...</span>
           </div>
         );
-      case false:
+      case false || undefined:
         return (
           <div>
             <a
@@ -35,10 +36,25 @@ const Header = () => {
             </a>
           </div>
         );
-      // Admin User 5f7de41f9daf8f52701096ef
-      case "5f7de41f9daf8f52701096e":
-        return <div>Admin Mode</div>;
+
+      case admin:
+        return (
+          <div>
+            <div>ADMIN MODE</div>
+            <div>
+              <a
+                className="btn btn-outline-light"
+                href="/api/logout"
+                role="button"
+                style={{ textTransform: "none" }}
+              >
+                Logout
+              </a>
+            </div>
+          </div>
+        );
       default:
+        console.log(auth);
         return (
           <div>
             <a
@@ -50,6 +66,31 @@ const Header = () => {
               Logout
             </a>
           </div>
+        );
+    }
+  };
+
+  const renderDashboard = () => {
+    switch (auth) {
+      case admin:
+        return (
+          <NavLink
+            className="nav-link"
+            to="/admindashboard"
+            activeClassName="active"
+          >
+            Admin Dashboard
+          </NavLink>
+        );
+      default:
+        return (
+          <NavLink
+            className="nav-link"
+            to="/dashboard"
+            activeClassName="active"
+          >
+            Dashboard
+          </NavLink>
         );
     }
   };
@@ -106,15 +147,7 @@ const Header = () => {
               Sell Your Furniture
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              className="nav-link"
-              to="/admindashboard"
-              activeClassName="active"
-            >
-              Dashboard
-            </NavLink>
-          </li>
+          <li className="nav-item">{renderDashboard()}</li>
         </ul>
 
         {renderLogin()}

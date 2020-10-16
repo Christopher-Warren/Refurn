@@ -86,7 +86,7 @@ const SellerForm = (props) => {
       case false:
         return (
           <div className="mt-5 pb-4 container">
-            <h1 className="text-center display-4">Furniture Submission Form</h1>
+            <h1 className="text-center display-4">Please log in.</h1>
           </div>
         );
       default:
