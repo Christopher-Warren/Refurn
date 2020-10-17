@@ -25,10 +25,12 @@ export default () => {
 
   return (
     <div>
-      <h1 className="display-4 text-center">Your listings</h1>
-      {userListings.map((listings) => {
-        return <UserListing key={listings._id} listings={listings} />;
-      })}
+      <h1 className="display-4 text-center">Your Offers</h1>
+      <div className="container">
+        {userListings.map((listings) => {
+          return <UserListing key={listings._id} listings={listings} />;
+        })}
+      </div>
     </div>
   );
 };

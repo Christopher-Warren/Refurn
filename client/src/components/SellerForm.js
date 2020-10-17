@@ -28,10 +28,7 @@ const SellerForm = (props) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
-  console.log(auth);
-  // Uploads the user image to our
-  // internal database, and shows
-  // the user a review modal.
+
   const onSubmitReview = async (e) => {
     e.preventDefault();
     // File Upload Data
@@ -75,6 +72,7 @@ const SellerForm = (props) => {
         altPhone,
         imageURL: uploadedFile.fileDir,
         userId: auth,
+        approved: null,
       };
       // fileDir is the generated Image URL
       await axios.post("/api/submit", listingData);

@@ -14,6 +14,7 @@ const formSchema = new Schema({
   phone: String,
   altPhone: String,
   userId: String,
+  approved: Boolean,
 });
 
 mongoose.model("listings", formSchema);

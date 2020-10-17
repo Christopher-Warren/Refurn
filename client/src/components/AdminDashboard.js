@@ -38,7 +38,7 @@ const AdminDashboard = () => {
       case "5f84ddd76c5aa621a4448718":
         return (
           <div className="container">
-            <h1 className="text-center display-3">Current Listings</h1>
+            <h1 className="text-center display-3">Current Offers</h1>
             <div className="row justify-content-center">
               {listings.map((listing) => {
                 return <Listing listings={listing} key={listing._id} />;

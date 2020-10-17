@@ -17,6 +17,25 @@ module.exports = (app) => {
 
     res.send(getUserListing);
   });
+  // Updates the listing for approval
+  app.post("/api/listings/approve/:id", async (req, res) => {
+    console.log("listing update approved");
+    await Listing.findByIdAndUpdate(req.params.id, {
+      approved: true,
+    });
+    const updateUserListing = await Listing.findById(req.params.id);
+    res.send(updateUserListing);
+  });
+  // Updates the listing for denial
+  app.post("/api/listings/deny/:id", async (req, res) => {
+    console.log("listing update denied");
+    await Listing.findByIdAndUpdate(req.params.id, {
+      approved: false,
+    });
+
+    const updateUserListing = await Listing.findById(req.params.id);
+    res.send(updateUserListing);
+  });
 
   // Finds and deletes the document
   // with specified id

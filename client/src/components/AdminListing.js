@@ -1,14 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export default ({ listings }) => {
+  const [approved, setApproved] = useState();
+  const listingId = listings._id;
+
+  useEffect(() => {
+    setApproved(listings.approved);
+  }, []);
+
   const handleDeny = async () => {
-    const listingId = listings._id;
-    await axios.delete("/api/listings/" + listingId, (req, res) => {
-      window.location.href = "/";
-    });
+    const { data } = await axios.post(`/api/listings/deny/${listingId}`);
+    console.log(data.approved);
+    setApproved(data.approved);
   };
-  console.log(listings);
+
+  const handleApprove = async () => {
+    const { data } = await axios.post(`/api/listings/approve/${listingId}`);
+    console.log(data.approved);
+    setApproved(data.approved);
+  };
+
+  const renderContent = () => {
+    switch (approved) {
+      case null:
+        return (
+          <div className="text-center mb-3">
+            <button
+              type="button"
+              className="btn btn-primary btn-lg mx-3 w-50"
+              onClick={handleApprove}
+            >
+              Accept Offer
+            </button>
+            <button
+              onClick={handleDeny}
+              type="button"
+              className="btn btn-danger btn-lg mx-3 w-50 mt-2"
+              data-id={listings._id}
+            >
+              Deny Offer
+            </button>
+          </div>
+        );
+      case true:
+        return (
+          <div className="text-center mb-3">
+            <button
+              type="button"
+              className="btn btn-success btn-lg mx-3 w-50"
+              onClick={handleApprove}
+              disabled
+            >
+              Approved - Call {listings.phone}
+            </button>
+          </div>
+        );
+      default:
+        return (
+          <div className="text-center mb-3">
+            <button
+              type="button"
+              className="btn btn-danger btn-lg mx-3 w-50 mt-2"
+              disabled
+            >
+              Offer Declined
+            </button>
+          </div>
+        );
+    }
+  };
 
   return (
     <div className="card w-75 mb-5 shadow">
@@ -39,20 +100,7 @@ export default ({ listings }) => {
           Details: {listings.detailText || "None"}
         </p>
       </div>
-      <div className="text-center mb-3">
-        <button type="button" className="btn btn-primary btn-lg mx-3 w-50">
-          Accept Offer
-        </button>
-        <button
-          onClick={handleDeny}
-          type="button"
-          className="btn btn-danger btn-lg mx-3 w-50 mt-2"
-          data-id={listings._id}
-        >
-          Deny Offer
-        </button>
-      </div>
-
+      {renderContent()}
       <div className="card-footer text-center">
         <small className="text-mute">Last updated 3 mins ago</small>
       </div>
