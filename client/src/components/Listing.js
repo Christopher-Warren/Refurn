@@ -17,6 +17,12 @@ export default ({ listings }) => {
         <p className="card-text text-center">
           Name: {`${listings.firstName} ${listings.lastName}`}
           <br />
+          Email: {`${listings.email || "None"}`}
+          <br />
+          Phone: {`${listings.phone || "None"}`}
+          <br />
+          Alt-Phone: {`${listings.altPhone || "None"}`}
+          <br />
           Asking Price: {listings.askingPrice || "None"}
           <br />
           Condition: {listings.condition || "None"}

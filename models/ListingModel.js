@@ -10,6 +10,9 @@ const formSchema = new Schema({
   detailText: String,
   askingPrice: String,
   imageURL: String,
+  email: String,
+  phone: String,
+  altPhone: String,
 });
 
 mongoose.model("listings", formSchema);

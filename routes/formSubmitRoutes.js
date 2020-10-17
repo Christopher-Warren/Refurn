@@ -13,6 +13,9 @@ module.exports = (app) => {
       detailText: req.body.detailText,
       askingPrice: req.body.askingPrice,
       imageURL: req.body.imageURL,
+      email: req.body.email,
+      phone: req.body.phone,
+      altPhone: req.body.altPhone,
     });
     newListing.save().then((listing) => res.send(listing));
   });

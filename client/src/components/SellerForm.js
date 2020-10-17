@@ -17,6 +17,9 @@ const SellerForm = (props) => {
   const [color, setColor] = useState("");
   const [detailText, setDetailText] = useState("");
   const [askingPrice, setAskingPrice] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [altPhone, setAltPhone] = useState("");
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
@@ -28,6 +31,7 @@ const SellerForm = (props) => {
   // the user a review modal.
   const onSubmitReview = async (e) => {
     e.preventDefault();
+    // File Upload Data
     const formData = new FormData();
     // this points to file in backend
     formData.append("file", file);
@@ -63,6 +67,9 @@ const SellerForm = (props) => {
         color,
         detailText,
         askingPrice,
+        email,
+        phone,
+        altPhone,
         imageURL: uploadedFile.fileDir,
       };
       // fileDir is the generated Image URL
@@ -83,7 +90,7 @@ const SellerForm = (props) => {
     switch (auth) {
       case null:
         return;
-      case false:
+      case false || undefined:
         return (
           <div className="mt-5 pb-4 container">
             <h1 className="text-center display-4">Please log in.</h1>
@@ -101,7 +108,7 @@ const SellerForm = (props) => {
                   <input
                     type="text"
                     className="form-control"
-                    id="inputFirstName"
+                    id="firstname"
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </div>
@@ -112,6 +119,36 @@ const SellerForm = (props) => {
                     className="form-control"
                     id="inputPassword4"
                     onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="inputFirstName">Email</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <label htmlFor="inputLastName">Phone</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="phone"
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+                <div className="form-group col-md-3">
+                  <label htmlFor="inputLastName">Alt. Phone</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputAltPhone"
+                    onChange={(e) => setAltPhone(e.target.value)}
                   />
                 </div>
               </div>
