@@ -1,7 +1,7 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
-const keys = require("./keys/dev") || require("./keys/prod");
+const keys = require("./keys/keys");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 
