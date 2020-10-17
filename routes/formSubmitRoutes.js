@@ -16,6 +16,7 @@ module.exports = (app) => {
       email: req.body.email,
       phone: req.body.phone,
       altPhone: req.body.altPhone,
+      userId: req.body.userId,
     });
     newListing.save().then((listing) => res.send(listing));
   });

@@ -13,6 +13,7 @@ const formSchema = new Schema({
   email: String,
   phone: String,
   altPhone: String,
+  userId: String,
 });
 
 mongoose.model("listings", formSchema);

@@ -10,22 +10,25 @@ const SellerForm = (props) => {
   const [uploadedFile, setUploadedFile] = useState({});
 
   // Form State
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [furnitureType, setFurnitureType] = useState("");
-  const [condition, setCondition] = useState("");
-  const [color, setColor] = useState("");
-  const [detailText, setDetailText] = useState("");
-  const [askingPrice, setAskingPrice] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [altPhone, setAltPhone] = useState("");
+  //const [id, setId] = useState("")
+  const [firstName, setFirstName] = useState("Chris");
+  const [lastName, setLastName] = useState("Warren");
+  const [furnitureType, setFurnitureType] = useState("Three Seater");
+  const [condition, setCondition] = useState("Excellent");
+  const [color, setColor] = useState("Purple");
+  const [detailText, setDetailText] = useState(
+    "This couch is pretty good, I don't have many complaints"
+  );
+  const [askingPrice, setAskingPrice] = useState("$78");
+  const [email, setEmail] = useState("chrisalmith@gmail.com");
+  const [phone, setPhone] = useState("555-555-5555");
+  const [altPhone, setAltPhone] = useState("555-555-5555");
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
   };
-
+  console.log(auth);
   // Uploads the user image to our
   // internal database, and shows
   // the user a review modal.
@@ -71,10 +74,10 @@ const SellerForm = (props) => {
         phone,
         altPhone,
         imageURL: uploadedFile.fileDir,
+        userId: auth,
       };
       // fileDir is the generated Image URL
       await axios.post("/api/submit", listingData);
-      console.log(listingData);
       // Send the User to /thankyou or /dashboard
       props.history.push("/thankyou");
     } catch (err) {
@@ -283,6 +286,7 @@ const SellerForm = (props) => {
                       <h2>Asking Price: {askingPrice}</h2>
                       {uploadedFile && (
                         <img
+                          className="card-img"
                           src={uploadedFile.filePath}
                           alt={uploadedFile.fileName}
                         ></img>

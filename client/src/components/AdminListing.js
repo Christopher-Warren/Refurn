@@ -1,6 +1,13 @@
 import React from "react";
+import axios from "axios";
 
 export default ({ listings }) => {
+  const handleDeny = async () => {
+    const listingId = listings._id;
+    await axios.delete("/api/listings/" + listingId, (req, res) => {
+      window.location.href = "/";
+    });
+  };
   console.log(listings);
 
   return (
@@ -8,7 +15,7 @@ export default ({ listings }) => {
       <img
         className="card-img-top"
         src={listings.imageURL}
-        alt="Card image cap"
+        alt={listings.furnitureType}
       ></img>
       <div className="card-body">
         <h5 className="card-title display-4 text-center">
@@ -36,7 +43,12 @@ export default ({ listings }) => {
         <button type="button" className="btn btn-primary btn-lg mx-3 w-50">
           Accept Offer
         </button>
-        <button type="button" className="btn btn-danger btn-lg mx-3 w-50 mt-2">
+        <button
+          onClick={handleDeny}
+          type="button"
+          className="btn btn-danger btn-lg mx-3 w-50 mt-2"
+          data-id={listings._id}
+        >
           Deny Offer
         </button>
       </div>

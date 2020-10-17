@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 
-import Listing from "./Listing";
+import Listing from "./AdminListing";
 
 import { AuthContext } from "../App";
 // Could possibly use a switch statement to determine
@@ -9,7 +9,7 @@ import { AuthContext } from "../App";
 // If not, the request to /api/listings can't happen.
 const AdminDashboard = () => {
   const auth = useContext(AuthContext);
-  const [status, setStatus] = useState("");
+
   const [listings, setListings] = useState([]);
   // probably need useEffect
 
@@ -24,25 +24,34 @@ const AdminDashboard = () => {
         setListings(data);
       } catch (err) {
         if (err.response.status === 401) {
-          setStatus("You must log in");
         } else if (err.response.status === 403) {
-          setStatus("Access forbidden");
         }
       }
     };
     getListings();
   }, []);
 
-  return (
-    <div className="container">
-      <h1 className="text-center display-3">Current Listings</h1>
-      <div className="row justify-content-center">
-        {listings.map((listing) => {
-          return <Listing listings={listing} key={listing._id} />;
-        })}
-      </div>
-    </div>
-  );
+  const renderListings = () => {
+    switch (auth) {
+      case null || undefined:
+        return <div>You Must Log In.</div>;
+      case "5f84ddd76c5aa621a4448718":
+        return (
+          <div className="container">
+            <h1 className="text-center display-3">Current Listings</h1>
+            <div className="row justify-content-center">
+              {listings.map((listing) => {
+                return <Listing listings={listing} key={listing._id} />;
+              })}
+            </div>
+          </div>
+        );
+      default:
+        return;
+    }
+  };
+
+  return <div>{renderListings()}</div>;
 };
 
 export default AdminDashboard;
