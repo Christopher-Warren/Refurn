@@ -6,7 +6,7 @@ import { NavLink, Link } from "react-router-dom";
 const Header = () => {
   const auth = useContext(AuthContext);
   // admin id is 5f84ddd76c5aa621a4448718
-  const admin = "5f84ddd76c5aa621a4448718";
+  const admin = "5f8bb02eda6cf40017de82da";
   // Gets user data and sets state
   // Renders Login/logout button at right of nav
   const renderLogin = () => {

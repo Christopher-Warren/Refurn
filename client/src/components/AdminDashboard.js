@@ -35,7 +35,7 @@ const AdminDashboard = () => {
     switch (auth) {
       case null || undefined:
         return <div>You Must Log In.</div>;
-      case "5f84ddd76c5aa621a4448718":
+      case "5f8bb02eda6cf40017de82da":
         return (
           <div className="container">
             <h1 className="text-center display-3">Current Offers</h1>
