@@ -32,32 +32,39 @@ module.exports = (app) => {
     console.log(`${DIRNAME}/client/public/uploads/${parsedSuffix}`);
 
     // Moves image file to host's DB
-    file.mv(`${DIRNAME}/client/public/uploads/${parsedSuffix}`, (err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).send(err);
-      }
-      // If upload successfull...
+    if (process.env.NODE_ENV === "development") {
+      file.mv(`${DIRNAME}/client/public/uploads/${parsedSuffix}`, (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send(err);
+        }
+        // If upload successfull...
 
-      res.json({
-        fileName: file.name,
-        filePath: `/uploads/${parsedSuffix}`,
-        fileDir: `${req.protocol}://${req.get("host")}${
-          req.url
-        }s/${parsedSuffix}`,
+        res.json({
+          fileName: file.name,
+          filePath: `/uploads/${parsedSuffix}`,
+          fileDir: `${req.protocol}://${req.get("host")}${
+            req.url
+          }s/${parsedSuffix}`,
+        });
       });
-    });
+    } else {
+      // todo: check env and return build or public
+      file.mv(`${DIRNAME}/client/build/uploads/${parsedSuffix}`, (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send(err);
+        }
+        // If upload successfull...
 
-    // Saves to /db/images/{img}
-    // file.mv(`${DIRNAME}/db/images/${file.name}`, (err) => {
-    //   console.log(`${DIRNAME}/db/images/`);
-    //   if (err) {
-    //     console.error(err);
-
-    //     return res.status(500).send(err);
-    //   }
-
-    //   res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-    // });
+        res.json({
+          fileName: file.name,
+          filePath: `/uploads/${parsedSuffix}`,
+          fileDir: `${req.protocol}://${req.get("host")}${
+            req.url
+          }s/${parsedSuffix}`,
+        });
+      });
+    }
   });
 };
