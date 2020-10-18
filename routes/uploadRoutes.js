@@ -14,7 +14,7 @@ module.exports = (app) => {
     env = "public";
   }
 
-  app.post("/upload", (req, res) => {
+  app.post("/uploader", (req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: "No files uploaded" });
     }

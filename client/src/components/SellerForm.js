@@ -35,6 +35,19 @@ const SellerForm = (props) => {
     const formData = new FormData();
     // this points to file in backend
     formData.append("file", file);
+    await axios.post("/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  };
+
+  const onSubmitReviewOld = async (e) => {
+    e.preventDefault();
+    // File Upload Data
+    const formData = new FormData();
+    // this points to file in backend
+    formData.append("file", file);
 
     try {
       const res = await axios.post("/upload", formData, {
@@ -222,6 +235,7 @@ const SellerForm = (props) => {
                   className="custom-file-input"
                   id="customFile"
                   onChange={onChange}
+                  name="file"
                 />
                 <label className="custom-file-label" htmlFor="customFile">
                   {fileName}
