@@ -2,14 +2,21 @@
 // and it returns a 32 bit string, with numbers,
 // and letters.
 const cryptStr = require("../services/crypstopher");
-
+const fs = require("fs");
+const { dirname } = require("path");
 // We need a route to handle deleting
 // a listing and it's contents
 
 module.exports = (app) => {
-  app.post("/upload", (req, res) => {
-    const DIRNAME = require("path").resolve(__dirname, "..");
+  const DIRNAME = require("path").resolve(__dirname, "..");
+  // fs.readdirSync("./").forEach((file) => {
+  //   console.log("FILES IN ./: " + file);
+  // });
+  fs.readdirSync("./client").forEach((file) => {
+    console.log("FILES IN ./client: " + file);
+  });
 
+  app.post("/upload", (req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: "No files uploaded" });
     }
@@ -27,13 +34,14 @@ module.exports = (app) => {
     } else {
       parsedSuffix = uniqueStr + ".".concat(urlSuffix);
     }
-    console.log(DIRNAME);
-    console.log(__dirname);
-    console.log(`${DIRNAME}/client/public/uploads/${parsedSuffix}`);
+    // console.log(DIRNAME);
+    // console.log(__dirname);
+    // console.log(`${DIRNAME}/client/public/uploads/${parsedSuffix}`);
 
     // Moves image file to host's DB
     if (process.env.NODE_ENV === "development") {
       file.mv(`${DIRNAME}/client/public/uploads/${parsedSuffix}`, (err) => {
+        console.log("dev");
         if (err) {
           console.error(err);
           return res.status(500).send(err);
@@ -51,6 +59,7 @@ module.exports = (app) => {
     } else {
       // todo: check env and return build or public
       file.mv(`${DIRNAME}/client/build/uploads/${parsedSuffix}`, (err) => {
+        console.log("build");
         if (err) {
           console.error(err);
           return res.status(500).send(err);
