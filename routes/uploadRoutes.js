@@ -2,22 +2,17 @@
 // and it returns a 32 bit string, with numbers,
 // and letters.
 const cryptStr = require("../services/crypstopher");
-const fs = require("fs");
-const { dirname } = require("path");
 // We need a route to handle deleting
 // a listing and it's contents
 
 module.exports = (app) => {
+  let env = null;
   const DIRNAME = require("path").resolve(__dirname, "..");
-  // fs.readdirSync("./").forEach((file) => {
-  //   console.log("FILES IN ./: " + file);
-  // });
-  fs.readdirSync("./client").forEach((file) => {
-    console.log("FILES IN ./client: " + file);
-  });
-  fs.readdirSync("./client/build").forEach((file) => {
-    console.log("FILES IN ./client/build: " + file);
-  });
+  if (process.env.NODE_ENV === "production") {
+    env = "build";
+  } else {
+    env = "public";
+  }
 
   app.post("/upload", (req, res) => {
     if (req.files === null) {
@@ -37,46 +32,23 @@ module.exports = (app) => {
     } else {
       parsedSuffix = uniqueStr + ".".concat(urlSuffix);
     }
-    // console.log(DIRNAME);
-    // console.log(__dirname);
-    // console.log(`${DIRNAME}/client/public/uploads/${parsedSuffix}`);
 
     // Moves image file to host's DB
-    if (process.env.NODE_ENV === "development") {
-      file.mv(`${DIRNAME}/client/public/uploads/${parsedSuffix}`, (err) => {
-        console.log("dev");
-        if (err) {
-          console.error(err);
-          return res.status(500).send(err);
-        }
-        // If upload successfull...
+    file.mv(`${DIRNAME}/client/${env}/uploads/${parsedSuffix}`, (err) => {
+      console.log("dev");
+      if (err) {
+        console.error(err);
+        return res.status(500).send(err);
+      }
+      // If upload successfull...
 
-        res.json({
-          fileName: file.name,
-          filePath: `/uploads/${parsedSuffix}`,
-          fileDir: `${req.protocol}://${req.get("host")}${
-            req.url
-          }s/${parsedSuffix}`,
-        });
+      res.json({
+        fileName: file.name,
+        filePath: `/uploads/${parsedSuffix}`,
+        fileDir: `${req.protocol}://${req.get("host")}${
+          req.url
+        }s/${parsedSuffix}`,
       });
-    } else {
-      // todo: check env and return build or public
-      file.mv(`${DIRNAME}/client/build/uploads/${parsedSuffix}`, (err) => {
-        console.log("build");
-        if (err) {
-          console.error(err);
-          return res.status(500).send(err);
-        }
-        // If upload successfull...
-
-        res.json({
-          fileName: file.name,
-          filePath: `/uploads/${parsedSuffix}`,
-          fileDir: `${req.protocol}://${req.get("host")}${
-            req.url
-          }s/${parsedSuffix}`,
-        });
-      });
-    }
+    });
   });
 };
