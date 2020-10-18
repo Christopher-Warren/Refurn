@@ -27,6 +27,9 @@ module.exports = (app) => {
     } else {
       parsedSuffix = uniqueStr + ".".concat(urlSuffix);
     }
+    console.log(DIRNAME);
+    console.log(__dirname);
+    console.log(`${DIRNAME}/client/public/uploads/${parsedSuffix}`);
 
     // Moves image file to host's DB
     file.mv(`${DIRNAME}/client/public/uploads/${parsedSuffix}`, (err) => {
