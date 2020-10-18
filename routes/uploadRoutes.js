@@ -15,6 +15,9 @@ module.exports = (app) => {
   fs.readdirSync("./client").forEach((file) => {
     console.log("FILES IN ./client: " + file);
   });
+  fs.readdirSync("./client/build").forEach((file) => {
+    console.log("FILES IN ./client/build: " + file);
+  });
 
   app.post("/upload", (req, res) => {
     if (req.files === null) {
