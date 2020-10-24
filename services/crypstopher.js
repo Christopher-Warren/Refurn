@@ -1,52 +1,54 @@
-module.exports = () => {
-  const randomStringGen = () => {
-    const randomArray = [];
-    const letters = [
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-      "h",
-      "i",
-      "j",
-      "j",
-      "l",
-      "m",
-      "n",
-      "o",
-      "p",
-      "q",
-      "r",
-      "s",
-      "t",
-      "u",
-      "v",
-      "w",
-      "x",
-      "y",
-      "z",
-    ];
-    // returns number 0-25
-    for (let i = 0; i < 32; i++) {
-      l = Math.floor(Math.random() * 26);
+const randomStringGen = () => {
+  const randomArray = [];
+  const letters = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "j",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
 
-      n = Math.floor(Math.random() * 10);
+  // Second arg determines the length
+  // of the array.
+  for (let i = 0; i < 32; i++) {
+    l = Math.floor(Math.random() * 26);
 
-      char = Math.floor(Math.random() * 3);
+    n = Math.floor(Math.random() * 10);
 
-      const chars = [letters[l], letters[l].toUpperCase(), n];
+    char = Math.floor(Math.random() * 3);
 
-      //console.log(chars[char]);
-      randomArray.push(chars[char]);
-    }
-    //console.log(randomString.toString().replace(/,/g, ""));
-    const randomString = randomArray.toString().replace(/,/g, "");
-    //console.log(randomString);
-    return randomString;
-  };
-  return randomStringGen();
-  // console.log(`crypto: ${randomLetter()}`);
+    // [0] will be a random lowercase letter a-z
+    // [1] will be a random uppercase letter A-Z
+    // [2] will be a random number 0-9
+    const chars = [letters[l], letters[l].toUpperCase(), n];
+
+    // Goes over chars, selects one of the 3 randomly
+    // generated characters and pushes it to the array.
+    randomArray.push(chars[char]);
+  }
+  const parsedString = randomArray.toString().replace(/,/g, "");
+
+  return parsedString;
 };
+module.exports = randomStringGen;

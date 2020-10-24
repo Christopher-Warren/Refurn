@@ -2,9 +2,6 @@ import React from "react";
 
 export default () => {
   return (
-    <img
-      className="card-img"
-      src="http://localhost:5000/image/98d6c742f517225258b0a3b38823f7f3.jpg"
-    ></img>
+    <img src="https://storage.googleapis.com/download/storage/v1/b/refurn.appspot.com/o/users%2F5f8bb02eda6cf40017de82da%2F22llP3qs5iizSSfzpVDD3vDj0a0r4PJo.jpg?generation=1603565467356279&alt=media"></img>
   );
 };

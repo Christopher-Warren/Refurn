@@ -1,54 +1,37 @@
-// Outputs a random 32 bit. Call cryptStr()
-// and it returns a 32 bit string, with numbers,
-// and letters.
-const cryptStr = require("../services/crypstopher");
-// We need a route to handle deleting
-// a listing and it's contents
+const firebase = require("firebase-admin");
 
 module.exports = (app) => {
-  let env = null;
-  const DIRNAME = require("path").resolve(__dirname, "..");
-  if (process.env.NODE_ENV === "production") {
-    env = "build";
-  } else {
-    env = "public";
-  }
+  const cryptStr = require("../services/crypstopher");
 
-  app.post("/uploader", (req, res) => {
+  app.post("/upload", async (req, res) => {
     if (req.files === null) {
       return res.status(400).json({ msg: "No files uploaded" });
     }
+    const file = req.files.file; // last object is name sent from frontend
 
-    const file = req.files.file;
-
-    // Parses file name and returns
-    // proper file suffix.
-    const uniqueStr = cryptStr();
     const urlSuffix = file.name.slice(-4);
     let parsedSuffix = "";
-    // e.g. parsedSuffix will be 93jcj3.jpg
     if (urlSuffix.startsWith(".")) {
-      parsedSuffix = uniqueStr + urlSuffix;
+      parsedSuffix = urlSuffix;
     } else {
-      parsedSuffix = uniqueStr + ".".concat(urlSuffix);
+      parsedSuffix = ".".concat(urlSuffix);
     }
 
-    // Moves image file to host's DB
-    file.mv(`${DIRNAME}/client/${env}/uploads/${parsedSuffix}`, (err) => {
-      console.log("dev");
-      if (err) {
-        console.error(err);
-        return res.status(500).send(err);
-      }
-      // If upload successfull...
-
-      res.json({
-        fileName: file.name,
-        filePath: `/uploads/${parsedSuffix}`,
-        fileDir: `${req.protocol}://${req.get("host")}${
-          req.url
-        }s/${parsedSuffix}`,
+    /**  //Uploads file to Firebase Storage 
+      // Creates access point to Bucket*/
+    const storage = firebase.storage().bucket();
+    await storage
+      .upload(file.tempFilePath, {
+        gzip: true,
+        destination: `users/${req.user._id}/${cryptStr()}${parsedSuffix}`,
+      })
+      .then((image) => {
+        storage.file(image[0].metadata.name).makePublic();
+        console.log(image[0].metadata.mediaLink);
+        res.json({
+          fileName: file.name,
+          fileURL: image[0].metadata.mediaLink,
+        });
       });
-    });
   });
 };

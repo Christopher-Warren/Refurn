@@ -35,11 +35,13 @@ const SellerForm = (props) => {
     const formData = new FormData();
     // this points to file in backend
     formData.append("file", file);
-    await axios.post("/upload", formData, {
+    const res = await axios.post("/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+    const { fileName, fileURL } = res.data;
+    setUploadedFile({ fileName, fileURL });
   };
 
   const onSubmitReviewOld = async (e) => {
@@ -83,7 +85,7 @@ const SellerForm = (props) => {
         email,
         phone,
         altPhone,
-        imageURL: uploadedFile.fileDir,
+        imageURL: uploadedFile.fileName,
         userId: auth,
         approved: null,
       };
@@ -299,7 +301,7 @@ const SellerForm = (props) => {
                       {uploadedFile && (
                         <img
                           className="card-img"
-                          src={uploadedFile.filePath}
+                          src={uploadedFile.fileURL}
                           alt={uploadedFile.fileName}
                         ></img>
                       )}
