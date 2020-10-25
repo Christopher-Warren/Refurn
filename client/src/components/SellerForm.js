@@ -40,8 +40,8 @@ const SellerForm = (props) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    const { fileName, fileURL } = res.data;
-    setUploadedFile({ fileName, fileURL });
+    const { fileName, fileURL, gcFileName } = res.data;
+    setUploadedFile({ fileName, fileURL, gcFileName });
   };
 
   const onSubmitReviewOld = async (e) => {
@@ -85,7 +85,9 @@ const SellerForm = (props) => {
         email,
         phone,
         altPhone,
-        imageURL: uploadedFile.fileName,
+        imageURL: uploadedFile.fileURL,
+        gcFileName: uploadedFile.gcFileName,
+        fileName,
         userId: auth,
         approved: null,
       };

@@ -7,8 +7,8 @@ module.exports = (app) => {
     if (req.files === null) {
       return res.status(400).json({ msg: "No files uploaded" });
     }
-    const file = req.files.file; // last object is name sent from frontend
-
+    const file = req.files.file; // last object {file} is name sent from frontend
+    // Parses the file name and file type
     const urlSuffix = file.name.slice(-4);
     let parsedSuffix = "";
     if (urlSuffix.startsWith(".")) {
@@ -18,20 +18,22 @@ module.exports = (app) => {
     }
 
     /**  //Uploads file to Firebase Storage 
-      // Creates access point to Bucket*/
+      
+    */
     const storage = firebase.storage().bucket();
-    await storage
-      .upload(file.tempFilePath, {
-        gzip: true,
-        destination: `users/${req.user._id}/${cryptStr()}${parsedSuffix}`,
-      })
-      .then((image) => {
-        storage.file(image[0].metadata.name).makePublic();
-        console.log(image[0].metadata.mediaLink);
+    const uploadOptions = {
+      gzip: true,
+      destination: `users/${req.user._id}/${cryptStr()}${parsedSuffix}`,
+    };
+    storage.upload(file.tempFilePath, uploadOptions, (err, image, response) => {
+      storage.file(image.metadata.name).makePublic((err, response) => {
+        console.log(image.name);
         res.json({
+          gcFileName: image.name,
           fileName: file.name,
-          fileURL: image[0].metadata.mediaLink,
+          fileURL: image.metadata.mediaLink,
         });
       });
+    });
   });
 };

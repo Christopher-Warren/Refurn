@@ -20,6 +20,10 @@ export default ({ listings }) => {
     console.log(data.approved);
     setApproved(data.approved);
   };
+  console.log(listings);
+  const deleteListing = async () => {
+    const { data } = await axios.delete(`/api/listings/${listingId}`);
+  };
 
   const renderContent = () => {
     switch (approved) {
@@ -72,7 +76,12 @@ export default ({ listings }) => {
   };
 
   return (
-    <div className="card w-75 mb-5 shadow">
+    <div className="card w-75 mb-5 shadow bg-light">
+      <div className="position-absolute text-right">
+        <button className="btn btn-danger" onClick={deleteListing}>
+          X
+        </button>
+      </div>
       <img
         className="card-img-top"
         src={listings.imageURL}

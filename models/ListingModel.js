@@ -10,6 +10,8 @@ const formSchema = new Schema({
   detailText: String,
   askingPrice: String,
   imageURL: String,
+  gcFileName: String,
+  fileName: String,
   email: String,
   phone: String,
   altPhone: String,

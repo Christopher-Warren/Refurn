@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const isAdmin = require("./isAdmin");
 const isAuthenticated = require("./isAuthenticated");
 const Listing = mongoose.model("listings");
+const firebase = require("firebase-admin");
 const bodyParser = require("body-parser").json();
 module.exports = (app) => {
   // Returns a list of ALL db items
@@ -41,8 +42,48 @@ module.exports = (app) => {
   // with specified id
   // isAuthenticated, isAdmin,
   app.delete("/api/listings/:id", async (req, res) => {
-    //const listing = await Listing.findById(req.body);
+    // DELETES MONGODB LISTING
     const deleteListing = await Listing.findByIdAndDelete(req.params.id);
-    res.send("comeplete");
+    res.send("complete");
+
+    // DELETES GOOGLE CLOUD IMAGE
+    const file = firebase
+      .storage()
+      .bucket()
+      .getFiles((err, files) => {
+        files.map((file) => {
+          if (file.metadata.metadata._id === req.params.id) {
+            console.log(file.metadata.name);
+            firebase
+              .storage()
+              .bucket()
+              .file(file.metadata.name)
+              .delete((err, response) => {
+                console.log("file deleted");
+              });
+          }
+        });
+      });
+  });
+
+  app.delete("/api/delete", async (req, res) => {
+    const id = "5f95d232a562843ca0e8560f";
+    const file = firebase
+      .storage()
+      .bucket()
+      .getFiles((err, files) => {
+        files.map((file) => {
+          if (file.metadata.metadata._id === id) {
+            console.log(file.metadata.name);
+            firebase
+              .storage()
+              .bucket()
+              .file(file.metadata.name)
+              .delete((err, response) => {
+                console.log("file deleted");
+              });
+          }
+        });
+      });
   });
 };
