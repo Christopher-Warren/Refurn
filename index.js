@@ -25,14 +25,14 @@ const database = mongoose.connect(keys.mongoURI, {
 });
 console.log("[200] STARTING FIREBASE INIT...");
 // Firebase Connection
-console.log("SERVICE: ", require("./keys/gcprod").private_key);
+console.log("SERVICE: ", require("./keys/gckeys").private_key);
 
 firebase.initializeApp({
   credential: firebase.credential.cert({
     type: gckeys.type,
     project_id: gckeys.project_id,
     private_key_id: gckeys.private_key_id,
-    private_key: gckeys.private_key,
+    private_key: gckeys.private_key.replace(/\\n/g, "\n"),
     client_email: gckeys.client_email,
     client_id: gckeys.client_id,
     auth_uri: gckeys.auth_uri,
