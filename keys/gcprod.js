@@ -1,4 +1,4 @@
-module.exports = JSON.stringify({
+module.exports = JSON.parse({
   type: process.env.gc_type,
   project_id: process.env.gc_project_id,
   private_key_id: process.env.gc_private_key_id,
