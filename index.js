@@ -9,6 +9,7 @@ const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
 // Firebase Dependencies
 const firebase = require("firebase-admin");
+const gckeys = require("./keys/gckeys");
 console.log("[200] DEPS LOADED SUCCESS");
 // App Models and Services
 require("./models/User");
@@ -25,9 +26,20 @@ const database = mongoose.connect(keys.mongoURI, {
 console.log("[200] STARTING FIREBASE INIT...");
 // Firebase Connection
 console.log("SERVICE: ", serviceAccount);
-console.log("TEST", JSON.parse(serviceAccount));
+
 firebase.initializeApp({
-  credential: firebase.credential.cert(JSON.parse(serviceAccount)),
+  credential: firebase.credential.cert({
+    type: gckeys.type,
+    project_id: gckeys.project_id,
+    private_key_id: gckeys.private_key_id,
+    private_key: gckeys.private_key,
+    client_email: gckeys.client_email,
+    client_id: gckeys.client_id,
+    auth_uri: gckeys.auth_uri,
+    token_uri: gckeys.token_uri,
+    auth_provider_x509_cert_url: gckeys.auth_provider_x509_cert_url,
+    client_x509_cert_url: gckeys.client_x509_cert_url,
+  }),
   databaseURL: "https://refurn.firebaseio.com",
   storageBucket: "refurn.appspot.com",
 });
