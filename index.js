@@ -25,8 +25,9 @@ const database = mongoose.connect(keys.mongoURI, {
 console.log("[200] STARTING FIREBASE INIT...");
 // Firebase Connection
 console.log("SERVICE: ", serviceAccount);
+console.log("TEST", JSON.parse(serviceAccount));
 firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
+  credential: firebase.credential.cert(JSON.parse(serviceAccount)),
   databaseURL: "https://refurn.firebaseio.com",
   storageBucket: "refurn.appspot.com",
 });
