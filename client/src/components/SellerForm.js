@@ -93,6 +93,12 @@ const SellerForm = (props) => {
         return (
           <div className="bg-light rounded-lg shadow-lg pb-4 px-4">
             <h1 className="text-center">Furniture Submission Form</h1>
+            <p className="h4 text-center">
+              Text values are hardcoded, but you can change them if you want!
+              <br />
+              The only required data is an image(Can be anything that's familly
+              friendly)
+            </p>
             <hr />
             <form onSubmit={onSubmitReview}>
               <div className="form-row">
