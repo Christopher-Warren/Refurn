@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../App";
+import { AuthContext, AdminContext } from "../App";
 
 import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
   const auth = useContext(AuthContext);
+  const { admin, setAdmin } = useContext(AdminContext);
+
   // admin id is 5f84ddd76c5aa621a4448718
-  const admin = "5f8bb02eda6cf40017de82da";
+  //const admin = "5f8bb02eda6cf40017de82da";
   // Gets user data and sets state
   // Renders Login/logout button at right of nav
   const renderLogin = () => {
@@ -37,10 +39,9 @@ const Header = () => {
           </div>
         );
 
-      case admin:
+      case "5f8bb02eda6cf40017de82da":
         return (
           <div>
-            <div>ADMIN MODE</div>
             <div>
               <a
                 className="btn btn-outline-light"
@@ -54,7 +55,6 @@ const Header = () => {
           </div>
         );
       default:
-        console.log(auth);
         return (
           <div>
             <a
@@ -72,7 +72,7 @@ const Header = () => {
 
   const renderDashboard = () => {
     switch (auth) {
-      case admin:
+      case "5f8bb02eda6cf40017de82da":
         return (
           <NavLink
             className="nav-link"
@@ -149,7 +149,18 @@ const Header = () => {
           </li>
           <li className="nav-item">{renderDashboard()}</li>
         </ul>
-
+        <button
+          onClick={() => {
+            console.log(admin);
+            setAdmin(!admin);
+          }}
+          className="btn btn-warning mr-2 text-white"
+        >
+          TOGGLE ADMIN
+        </button>
+        <button className="btn btn-warning mr-2 text-white">
+          USER / ADMIN
+        </button>
         {renderLogin()}
       </div>
     </nav>
@@ -157,4 +168,3 @@ const Header = () => {
 };
 
 export default Header;
-//

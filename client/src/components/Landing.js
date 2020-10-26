@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => {
+const Landing = () => {
   return (
     <div class="jumbotron jumbotron-fluid bg-transparent text-light">
       <div className="container">
@@ -28,3 +28,5 @@ export default () => {
     </div>
   );
 };
+
+export default Landing;

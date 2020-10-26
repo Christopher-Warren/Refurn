@@ -1,5 +1,7 @@
 import React from "react";
 
-export default () => {
+const ThankYou = () => {
   return <div>Thanks for your submission. We will contact you shortly.</div>;
 };
+
+export default ThankYou;

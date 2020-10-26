@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default ({ listings }) => {
+const AdminListing = ({ listings, getListings }) => {
   const [approved, setApproved] = useState();
+
   const listingId = listings._id;
 
   useEffect(() => {
     setApproved(listings.approved);
-  }, []);
+  }, [listings.approved]);
 
   const handleDeny = async () => {
     const { data } = await axios.post(`/api/listings/deny/${listingId}`);
-    console.log(data.approved);
+
     setApproved(data.approved);
   };
 
   const handleApprove = async () => {
     const { data } = await axios.post(`/api/listings/approve/${listingId}`);
-    console.log(data.approved);
+
     setApproved(data.approved);
   };
-  console.log(listings);
+
   const deleteListing = async () => {
-    const { data } = await axios.delete(`/api/listings/${listingId}`);
+    await axios.delete(`/api/listings/${listingId}`);
+    getListings();
   };
 
   const renderContent = () => {
@@ -116,3 +118,5 @@ export default ({ listings }) => {
     </div>
   );
 };
+
+export default AdminListing;

@@ -44,30 +44,6 @@ const SellerForm = (props) => {
     setUploadedFile({ fileName, fileURL, gcFileName });
   };
 
-  const onSubmitReviewOld = async (e) => {
-    e.preventDefault();
-    // File Upload Data
-    const formData = new FormData();
-    // this points to file in backend
-    formData.append("file", file);
-
-    try {
-      const res = await axios.post("/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      const { fileName, filePath, fileDir } = res.data;
-      setUploadedFile({ fileName, filePath, fileDir });
-    } catch (err) {
-      if (err.response.status === 500) {
-        console.log("there was a problem with the server");
-      } else {
-        console.log(err.response.data.msg);
-      }
-    }
-  };
   // Is called when user clicks Submit on
   // the review form and sends the form
   // data to our database.
@@ -91,7 +67,6 @@ const SellerForm = (props) => {
         userId: auth,
         approved: null,
       };
-      // fileDir is the generated Image URL
       await axios.post("/api/submit", listingData);
       // Send the User to /thankyou or /dashboard
       props.history.push("/thankyou");
@@ -116,7 +91,7 @@ const SellerForm = (props) => {
         );
       default:
         return (
-          <div className="card border-dark shadow-lg mt-5 pb-4 container">
+          <div className="card border-dark shadow-lg mt-5 pb-4 container bg-custom text-light">
             <h1 className="text-center display-4">Furniture Submission Form</h1>
 
             <form onSubmit={onSubmitReview}>

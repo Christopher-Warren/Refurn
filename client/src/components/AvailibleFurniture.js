@@ -1,5 +1,7 @@
 import React from "react";
 
-export default () => {
+const AvailibleFurniture = () => {
   return <h1>Availible Furniture</h1>;
 };
+
+export default AvailibleFurniture;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ listings }) => {
+const UserListing = ({ listings }) => {
   const renderContent = () => {
     switch (listings.approved) {
       case false:
@@ -42,6 +42,8 @@ export default ({ listings }) => {
             </button>
           </div>
         );
+      default:
+        return;
     }
   };
 
@@ -71,3 +73,5 @@ export default ({ listings }) => {
     </div>
   );
 };
+
+export default UserListing;

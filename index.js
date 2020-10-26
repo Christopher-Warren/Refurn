@@ -1,4 +1,3 @@
-console.log("[200] APP RUNNING");
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
@@ -10,7 +9,7 @@ const bodyParser = require("body-parser");
 // Firebase Dependencies
 const firebase = require("firebase-admin");
 const gckeys = require("./keys/gckeys");
-console.log("[200] DEPS LOADED SUCCESS");
+
 // App Models and Services
 require("./models/User");
 require("./models/ListingModel");
@@ -23,9 +22,8 @@ const database = mongoose.connect(keys.mongoURI, {
   useUnifiedTopology: true,
   useFindAndModify: false,
 });
-console.log("[200] STARTING FIREBASE INIT...");
+
 // Firebase Connection
-console.log("SERVICE: ", require("./keys/gckeys").private_key);
 
 firebase.initializeApp({
   credential: firebase.credential.cert({
@@ -43,7 +41,7 @@ firebase.initializeApp({
   databaseURL: "https://refurn.firebaseio.com",
   storageBucket: "refurn.appspot.com",
 });
-console.log("[200] ... GOOD");
+
 // MongoDB File Upload Middlewares
 app.use(
   fileUpload({

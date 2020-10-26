@@ -11,9 +11,11 @@ import AdminDashboard from "./components/AdminDashboard";
 import UserDashboard from "./components/UserDashboard";
 
 export const AuthContext = createContext();
-
-export default () => {
+export const AdminContext = createContext({ admin: false, setAdmin: () => {} });
+const App = () => {
   const [auth, setAuth] = useState(null);
+  const [admin, setAdmin] = useState(false);
+  const value = { admin, setAdmin };
 
   useEffect(() => {
     const getUser = async () => {
@@ -25,18 +27,22 @@ export default () => {
   }, []);
 
   return (
-    <AuthContext.Provider value={auth}>
-      <BrowserRouter>
-        <div className="">
-          <Route path="/" component={Header} />
-          <Route path="/landing" component={Landing} />
-          <Route path="/sellerform" component={SellerForm} />
-          <Route path="/availiblefurniture" component={AvailibleFurniture} />
-          <Route path="/thankyou" component={ThankYou} />
-          <Route path="/dashboard" component={UserDashboard} />
-          <Route path="/admindashboard" component={AdminDashboard} />
-        </div>
-      </BrowserRouter>
-    </AuthContext.Provider>
+    <AdminContext.Provider value={value}>
+      <AuthContext.Provider value={auth}>
+        <BrowserRouter>
+          <div className="">
+            <Route path="/" component={Header} />
+            <Route path="/landing" component={Landing} />
+            <Route path="/sellerform" component={SellerForm} />
+            <Route path="/availiblefurniture" component={AvailibleFurniture} />
+            <Route path="/thankyou" component={ThankYou} />
+            <Route path="/dashboard" component={UserDashboard} />
+            <Route path="/admindashboard" component={AdminDashboard} />
+          </div>
+        </BrowserRouter>
+      </AuthContext.Provider>
+    </AdminContext.Provider>
   );
 };
+
+export default App;

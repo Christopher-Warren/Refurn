@@ -13,6 +13,6 @@
   position: absolute;
 }
 
-.transp {
-  opacity: 50%;
+.bg-custom {
+  background-color: rgba(49, 49, 49, 0.973) !important;
 }

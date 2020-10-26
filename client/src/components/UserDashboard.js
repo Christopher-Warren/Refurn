@@ -4,7 +4,7 @@ import axios from "axios";
 
 import UserListing from "./UserListing";
 
-export default () => {
+const UserDashboard = () => {
   const auth = useContext(AuthContext);
   const [userListings, setUserListings] = useState([]);
 
@@ -34,3 +34,5 @@ export default () => {
     </div>
   );
 };
+
+export default UserDashboard;
