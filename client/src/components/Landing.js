@@ -3,7 +3,7 @@ import React from "react";
 const Landing = () => {
   return (
     <div className="jumbotron jumbotron-fluid bg-transparent text-light p-0">
-      <div className="container">
+      <div className="container bg-custom rounded">
         <h1 className="display-4">Welcome to Refurn</h1>
         <p className="lead">
           Everyday, perfectly usable furniture is thrown away. We are here to
@@ -11,9 +11,16 @@ const Landing = () => {
           so.
           <br />
           <br />
-          Do you have furniture that you need to get rid of asap and don't want
-          the hassle of local, online, marketplaces? Sign up now, and show us
-          what you've got.
+          This is an imaginary business where a local user can upload furniture
+          to sell, when they would normally throw it away. The business owner
+          can then respond to that offer, and the user can see the response via
+          their dashboard. The owner can then resell the furniture via
+          "Availible Furniture"
+          <br />
+          <strong>
+            Tech Stack: MongoDB, Express, React, Node.js, Firebase Storage,
+            Bootstrap
+          </strong>
         </p>
         <hr className="my-2" />
         <p className="lead text-warning mx-5">
