@@ -14,5 +14,9 @@
 }
 
 .bg-custom {
-  background-color: rgba(49, 49, 49, 0.973) !important;
+  background-color: rgba(49, 49, 49, 0.719) !important;
+}
+.shrink {
+  width: 500px !important;
+  height: 500px !important;
 }

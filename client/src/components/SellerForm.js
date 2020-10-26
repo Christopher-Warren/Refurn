@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../App";
 import axios from "axios";
 
@@ -11,16 +11,16 @@ const SellerForm = (props) => {
 
   // Form State
   //const [id, setId] = useState("")
-  const [firstName, setFirstName] = useState("Chris");
-  const [lastName, setLastName] = useState("Warren");
-  const [furnitureType, setFurnitureType] = useState("Three Seater");
+  const [firstName, setFirstName] = useState("John");
+  const [lastName, setLastName] = useState("Doe");
+  const [furnitureType, setFurnitureType] = useState("Couch");
   const [condition, setCondition] = useState("Excellent");
-  const [color, setColor] = useState("Purple");
+  const [color, setColor] = useState("Blue");
   const [detailText, setDetailText] = useState(
-    "This couch is pretty good, I don't have many complaints"
+    "The foam is still firm after 5 years. Light scratches only."
   );
-  const [askingPrice, setAskingPrice] = useState("$78");
-  const [email, setEmail] = useState("chrisalmith@gmail.com");
+  const [askingPrice, setAskingPrice] = useState("$100");
+  const [email, setEmail] = useState("Johndoe@gmail.com");
   const [phone, setPhone] = useState("555-555-5555");
   const [altPhone, setAltPhone] = useState("555-555-5555");
 
@@ -104,6 +104,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="firstname"
+                    placeholder="John"
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </div>
@@ -115,6 +116,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="inputPassword4"
+                    placeholder="Doe"
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </div>
@@ -129,6 +131,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="email"
+                    placeholder="Johndoe@gmail.com"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -140,6 +143,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="phone"
+                    placeholder="555-555-5555"
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
@@ -151,6 +155,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="inputAltPhone"
+                    placeholder="555-555-5555"
                     onChange={(e) => setAltPhone(e.target.value)}
                   />
                 </div>
@@ -165,7 +170,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="inputFurnitureType"
-                    placeholder="e.g Love Seat"
+                    placeholder="Couch"
                     onChange={(e) => setFurnitureType(e.target.value)}
                   />
                 </div>
@@ -193,6 +198,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="inputColor"
+                    placeholder="Blue"
                     onChange={(e) => setColor(e.target.value)}
                   />
                 </div>
@@ -207,7 +213,7 @@ const SellerForm = (props) => {
                     type="text"
                     className="form-control"
                     id="inputDetails"
-                    placeholder="This couch has endured many hours of very comfortable gaming."
+                    placeholder="The foam is still firm after 5 years. Light scratches only."
                     onChange={(e) => setDetailText(e.target.value)}
                   />
                 </div>
@@ -243,23 +249,12 @@ const SellerForm = (props) => {
                 </label>
               </div>
 
-              <div className="form-group">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id="gridCheck"
-                  />
-                  <label className="form-check-label" htmlFor="gridCheck">
-                    Check me out
-                  </label>
-                </div>
-              </div>
+              <div className="form-group"></div>
               <button
                 type="submit"
                 data-toggle="modal"
                 data-target="#staticBackdrop"
-                className="btn btn-primary"
+                className="btn btn-primary justify-content-center"
               >
                 Submit For Review
               </button>

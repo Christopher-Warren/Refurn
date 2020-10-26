@@ -39,7 +39,7 @@ const Header = () => {
           </div>
         );
 
-      case "5f8bb02eda6cf40017de82da":
+      case auth:
         return (
           <div>
             <div>
@@ -72,16 +72,16 @@ const Header = () => {
 
   const renderDashboard = () => {
     switch (auth) {
-      case "5f8bb02eda6cf40017de82da":
-        return (
-          <NavLink
-            className="nav-link"
-            to="/admindashboard"
-            activeClassName="active"
-          >
-            Admin Dashboard
-          </NavLink>
-        );
+      // case "5f8bb02eda6cf40017de82da":
+      //   return (
+      //     <NavLink
+      //       className="nav-link"
+      //       to="/admindashboard"
+      //       activeClassName="active"
+      //     >
+      //       Admin Dashboard
+      //     </NavLink>
+      //   );
       default:
         return (
           <NavLink
@@ -149,19 +149,17 @@ const Header = () => {
               </NavLink>
             </li>
             <li className="nav-item">{renderDashboard()}</li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-link font-weight-bold bg-secondary rounded"
+                to="/admindashboard"
+                activeClassName="active"
+              >
+                Admin Dashboard
+              </NavLink>
+            </li>
           </ul>
-          <button
-            onClick={() => {
-              console.log(admin);
-              setAdmin(!admin);
-            }}
-            className="btn btn-warning mr-2 text-white"
-          >
-            TOGGLE ADMIN
-          </button>
-          <button className="btn btn-warning mr-2 text-white">
-            USER / ADMIN
-          </button>
+
           {renderLogin()}
         </div>
       </nav>

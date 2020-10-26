@@ -48,27 +48,38 @@ const UserListing = ({ listings }) => {
   };
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <h5 className="card-title">{listings.furnitureType}</h5>
-        <p className="card-text">
-          Name: {`${listings.firstName} ${listings.lastName}`}
-          <br />
-          Email: {`${listings.email || "None"}`}
-          <br />
-          Phone: {`${listings.phone || "None"}`}
-          <br />
-          Alt-Phone: {`${listings.altPhone || "None"}`}
-          <br />
-          Asking Price: {listings.askingPrice || "None"}
-          <br />
-          Condition: {listings.condition || "None"}
-          <br />
-          Color: {listings.color || "None"}
-          <br />
-          Details: {listings.detailText || "None"}
-        </p>
-        {renderContent()}
+    <div className="card my-4 text-center">
+      <div className="row no-gutters">
+        <div className="col-md-5">
+          <img
+            className="card-img img-fluid"
+            style={{ height: "400px" }}
+            src={listings.imageURL}
+          ></img>
+        </div>
+        <div className="col-md-7">
+          <div className="card-body text-center">
+            <h5 className="card-title">{listings.furnitureType}</h5>
+            <p className="card-text">
+              Name: {`${listings.firstName} ${listings.lastName}`}
+              <br />
+              Email: {`${listings.email || "None"}`}
+              <br />
+              Phone: {`${listings.phone || "None"}`}
+              <br />
+              Alt-Phone: {`${listings.altPhone || "None"}`}
+              <br />
+              Asking Price: {listings.askingPrice || "None"}
+              <br />
+              Condition: {listings.condition || "None"}
+              <br />
+              Color: {listings.color || "None"}
+              <br />
+              Details: {listings.detailText || "None"}
+            </p>
+          </div>
+          <div>{renderContent()}</div>
+        </div>
       </div>
     </div>
   );
