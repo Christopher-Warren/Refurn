@@ -96,74 +96,76 @@ const Header = () => {
   };
 
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark shadow-sm"
-      style={{ backgroundColor: "#0cb6c2" }}
-    >
-      <Link className="navbar-brand mt-2" to="/">
-        <img
-          src="/refurnv2.png"
-          width="50"
-          height="50"
-          className="mb-2"
-          alt="Refurn Logo"
-        />
-        <h3 className="d-inline">Refurn</h3>
-      </Link>
-
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarText"
-        aria-controls="navbarText"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+    <div>
+      <nav
+        className="navbar navbar-expand-lg navbar-dark mb-3 shadow-sm"
+        style={{ backgroundColor: "#0cb6c2" }}
       >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarText">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <NavLink
-              className="nav-link"
-              to="/landing"
-              activeClassName="active"
-            >
-              Home
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/availiblefurniture">
-              Availible Furniture
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              className="nav-link"
-              to="/sellerform"
-              activeClassName="active"
-            >
-              Sell Your Furniture
-            </NavLink>
-          </li>
-          <li className="nav-item">{renderDashboard()}</li>
-        </ul>
+        <Link className="navbar-brand mt-2" to="/">
+          <img
+            src="/refurnv2.png"
+            width="50"
+            height="50"
+            className="mb-2"
+            alt="Refurn Logo"
+          />
+          <h3 className="d-inline">Refurn</h3>
+        </Link>
+
         <button
-          onClick={() => {
-            console.log(admin);
-            setAdmin(!admin);
-          }}
-          className="btn btn-warning mr-2 text-white"
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          TOGGLE ADMIN
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <button className="btn btn-warning mr-2 text-white">
-          USER / ADMIN
-        </button>
-        {renderLogin()}
-      </div>
-    </nav>
+        <div className="collapse navbar-collapse" id="navbarText">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                to="/landing"
+                activeClassName="active"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/availiblefurniture">
+                Availible Furniture
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                className="nav-link"
+                to="/sellerform"
+                activeClassName="active"
+              >
+                Sell Your Furniture
+              </NavLink>
+            </li>
+            <li className="nav-item">{renderDashboard()}</li>
+          </ul>
+          <button
+            onClick={() => {
+              console.log(admin);
+              setAdmin(!admin);
+            }}
+            className="btn btn-warning mr-2 text-white"
+          >
+            TOGGLE ADMIN
+          </button>
+          <button className="btn btn-warning mr-2 text-white">
+            USER / ADMIN
+          </button>
+          {renderLogin()}
+        </div>
+      </nav>
+    </div>
   );
 };
 

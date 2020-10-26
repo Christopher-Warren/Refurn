@@ -3,6 +3,7 @@ import axios from "axios";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import SellerForm from "./components/SellerForm";
 import Landing from "./components/Landing";
 import AvailibleFurniture from "./components/AvailibleFurniture";
@@ -30,15 +31,17 @@ const App = () => {
     <AdminContext.Provider value={value}>
       <AuthContext.Provider value={auth}>
         <BrowserRouter>
-          <div className="">
-            <Route path="/" component={Header} />
-            <Route path="/landing" component={Landing} />
-            <Route path="/sellerform" component={SellerForm} />
-            <Route path="/availiblefurniture" component={AvailibleFurniture} />
-            <Route path="/thankyou" component={ThankYou} />
-            <Route path="/dashboard" component={UserDashboard} />
-            <Route path="/admindashboard" component={AdminDashboard} />
-          </div>
+          <Route path="/" component={Header} />
+
+          <Route path="/landing" component={Landing} />
+          <Route path="/sellerform" component={SellerForm} />
+          <Route path="/availiblefurniture" component={AvailibleFurniture} />
+          <Route path="/thankyou" component={ThankYou} />
+          <Route path="/dashboard" component={UserDashboard} />
+
+          <Route path="/admindashboard" component={AdminDashboard} />
+          <div class="wrapper flex-grow-1"></div>
+          <Route path="/" component={Footer} />
         </BrowserRouter>
       </AuthContext.Provider>
     </AdminContext.Provider>

@@ -79,7 +79,7 @@ const SellerForm = (props) => {
     }
   };
 
-  const renderContent = () => {
+  const renderForm = () => {
     switch (auth) {
       case null:
         return;
@@ -91,13 +91,15 @@ const SellerForm = (props) => {
         );
       default:
         return (
-          <div className="card border-dark shadow-lg mt-5 pb-4 container bg-custom text-light">
-            <h1 className="text-center display-4">Furniture Submission Form</h1>
-
+          <div className="bg-light rounded-lg shadow-lg pb-4 px-4">
+            <h1 className="text-center">Furniture Submission Form</h1>
+            <hr />
             <form onSubmit={onSubmitReview}>
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label htmlFor="inputFirstName">First Name</label>
+                  <label htmlFor="inputFirstName">
+                    <strong>First Name</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -106,7 +108,9 @@ const SellerForm = (props) => {
                   />
                 </div>
                 <div className="form-group col-md-6">
-                  <label htmlFor="inputLastName">Last Name</label>
+                  <label htmlFor="inputLastName">
+                    <strong>Last Name</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -118,7 +122,9 @@ const SellerForm = (props) => {
 
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label htmlFor="inputFirstName">Email</label>
+                  <label htmlFor="inputFirstName">
+                    <strong>Email</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -127,7 +133,9 @@ const SellerForm = (props) => {
                   />
                 </div>
                 <div className="form-group col-md-3">
-                  <label htmlFor="inputLastName">Phone</label>
+                  <label htmlFor="inputLastName">
+                    <strong>Phone</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -136,7 +144,9 @@ const SellerForm = (props) => {
                   />
                 </div>
                 <div className="form-group col-md-3">
-                  <label htmlFor="inputLastName">Alt. Phone</label>
+                  <label htmlFor="inputLastName">
+                    <strong>Alt. Phone</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -148,7 +158,9 @@ const SellerForm = (props) => {
 
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label htmlFor="inputFurnitureType">Furniture Type</label>
+                  <label htmlFor="inputFurnitureType">
+                    <strong>Furniture Type</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -158,7 +170,9 @@ const SellerForm = (props) => {
                   />
                 </div>
                 <div className="form-group col-md-4">
-                  <label htmlFor="inputCondition">Condition</label>
+                  <label htmlFor="inputCondition">
+                    <strong>Condition</strong>
+                  </label>
                   <select
                     id="inputCondition"
                     className="form-control"
@@ -172,7 +186,9 @@ const SellerForm = (props) => {
                   </select>
                 </div>
                 <div className="form-group col-md-2">
-                  <label htmlFor="inputColor">Color</label>
+                  <label htmlFor="inputColor">
+                    <strong>Color</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -184,7 +200,9 @@ const SellerForm = (props) => {
 
               <div className="form-row">
                 <div className="form-group col-md-8">
-                  <label htmlFor="inputPrice">Details</label>
+                  <label htmlFor="inputPrice">
+                    <strong>Details</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -197,7 +215,9 @@ const SellerForm = (props) => {
 
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label htmlFor="inputPrice">Asking Price</label>
+                  <label htmlFor="inputPrice">
+                    <strong>Asking Price</strong>
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -207,7 +227,9 @@ const SellerForm = (props) => {
                   />
                 </div>
               </div>
-              <p className="mb-2">Upload an Image</p>
+              <p className="mb-2">
+                <strong>Upload an Image</strong>
+              </p>
               <div className="form-group col-md-4 custom-file mb-3">
                 <input
                   type="file"
@@ -308,8 +330,8 @@ const SellerForm = (props) => {
         );
     }
   };
-
-  return <Fragment>{renderContent()}</Fragment>;
+  // <div className=" bg-light " style={{ height: "200px" }}></div>
+  return <div className="container">{renderForm()}</div>;
 };
 
 export default SellerForm;
