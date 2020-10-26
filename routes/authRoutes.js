@@ -20,7 +20,7 @@ module.exports = (app) => {
 
   app.get("/api/current_user", (req, res) => {
     if (req.user) {
-      console.log(`User "${req.user._id}" is logged in...`);
+      console.log(`[AUTHROUTES] User "${req.user._id}" is logged in...`);
       res.send(req.user);
     } else {
       res.send(false);

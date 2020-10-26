@@ -1,8 +1,13 @@
+/** @Todo
+ * • Implement User/Admin Mode for testing purposes.
+ *
+ *
+ */
+
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
 const keys = require("./keys/keys");
-const serviceAccount = require("./keys/gckeys");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 const bodyParser = require("body-parser");
@@ -17,7 +22,7 @@ require("./services/passport");
 // Server Initialization
 const app = express();
 // MongoDB Connection
-const database = mongoose.connect(keys.mongoURI, {
+mongoose.connect(keys.mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -49,7 +54,6 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
-// Can possibly remove
 app.use(bodyParser.json());
 
 // Cookie Middleware

@@ -51,4 +51,5 @@ const randomStringGen = () => {
 
   return parsedString;
 };
+console.log(randomStringGen());
 module.exports = randomStringGen;

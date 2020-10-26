@@ -26,7 +26,7 @@ const AdminListing = ({ listings, getListings }) => {
     await axios.delete(`/api/listings/${listingId}`);
     getListings();
   };
-
+  // Renders buttons based on approved(boolean)
   const renderContent = () => {
     switch (approved) {
       case null:
@@ -111,6 +111,7 @@ const AdminListing = ({ listings, getListings }) => {
           Details: {listings.detailText || "None"}
         </p>
       </div>
+
       {renderContent()}
       <div className="card-footer text-center">
         <small className="text-mute">Last updated 3 mins ago</small>
