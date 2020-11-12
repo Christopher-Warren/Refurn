@@ -3,10 +3,10 @@ import React from "react";
 const Footer = () => {
   return (
     <footer
-      class="text-light text-center mt-3 shadow-sm"
+      className="text-light text-center mt-3 shadow-sm"
       style={{ backgroundColor: "#0cb6c2" }}
     >
-      <div class="footer-copyright text-center py-3">
+      <div className="footer-copyright text-center py-3">
         © 2020 Copyright:
         <a className="text-primary" href="https://www.chriswarren.tech/">
           {" "}

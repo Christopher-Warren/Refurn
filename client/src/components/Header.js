@@ -89,7 +89,7 @@ const Header = () => {
             to="/dashboard"
             activeClassName="active"
           >
-            Dashboard
+            User Dashboard
           </NavLink>
         );
     }
@@ -134,11 +134,7 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/availiblefurniture">
-                Availible Furniture
-              </NavLink>
-            </li>
+
             <li className="nav-item">
               <NavLink
                 className="nav-link"

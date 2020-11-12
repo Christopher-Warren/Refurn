@@ -46,7 +46,6 @@ const UserListing = ({ listings }) => {
         return;
     }
   };
-
   return (
     <div className="card my-4 text-center">
       <div className="row no-gutters">
@@ -55,6 +54,7 @@ const UserListing = ({ listings }) => {
             className="card-img img-fluid"
             style={{ height: "400px" }}
             src={listings.imageURL}
+            alt={listings.fileName}
           ></img>
         </div>
         <div className="col-md-7">

@@ -6,7 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SellerForm from "./components/SellerForm";
 import Landing from "./components/Landing";
-import AvailibleFurniture from "./components/AvailibleFurniture";
+
 import ThankYou from "./components/ThankYou";
 import AdminDashboard from "./components/AdminDashboard";
 import UserDashboard from "./components/UserDashboard";
@@ -31,16 +31,17 @@ const App = () => {
     <AdminContext.Provider value={value}>
       <AuthContext.Provider value={auth}>
         <BrowserRouter>
-          <Route path="/" component={Header} />
+          <Header />
 
-          <Route path="/landing" component={Landing} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/landing" component={Landing} />
           <Route path="/sellerform" component={SellerForm} />
-          <Route path="/availiblefurniture" component={AvailibleFurniture} />
+
           <Route path="/thankyou" component={ThankYou} />
           <Route path="/dashboard" component={UserDashboard} />
 
           <Route path="/admindashboard" component={AdminDashboard} />
-          <div class="wrapper flex-grow-1"></div>
+          <div className="wrapper flex-grow-1"></div>
           <Route path="/" component={Footer} />
         </BrowserRouter>
       </AuthContext.Provider>
