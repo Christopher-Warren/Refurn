@@ -4,7 +4,7 @@
 
 
 
-#### Refurn is a IP location finder tool, built using - Node.Js, Express, Axios, MongoDB, GoogleCloud Storage, React, React-Router, Passport, and Bootstrap.  
+#### Refurn is a mock furniture resell business, built using - Node.Js, Express, Axios, MongoDB, GoogleCloud Storage, React, React-Router, Passport, and Bootstrap.  
 Link: https://refurn.herokuapp.com/landing  
 
 
