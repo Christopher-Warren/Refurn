@@ -10,9 +10,6 @@ Link: https://refurn.herokuapp.com/landing
 
 ![Refurn Screenshot](https://i.imgur.com/aee6rH8.png)
   
-### IMPORTANT!
-In order to showcase this app's features, I have disabled all route security, thus allowing anyone access to API endpoints. Endpoints can be secured at any point using
-authRoutes.js as middleware.
   
 ### Features
 - Auth solution saves User data to MongoDB
